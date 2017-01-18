@@ -1,5 +1,6 @@
 import * as TYPE from "../actions/auth";
 import {FAILED, START, SUCCESS} from "../common/constants";
+import {LOAD_REDUX_STATE} from "../actions/loadPersistantData";
 
 export default function otpRequest(state = {}, action) {
     switch (action.type) {
@@ -20,6 +21,11 @@ export default function otpRequest(state = {}, action) {
                 ...state,
                 status: FAILED
             };
+        case LOAD_REDUX_STATE:
+            if (action.payload)
+                return {...action.payload.auth};
+
+            return {};
         default:
             return state;
     }
