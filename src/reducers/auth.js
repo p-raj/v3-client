@@ -14,6 +14,7 @@ export default function otpRequest(state = {}, action) {
             return {
                 ...state,
                 ...action.payload,
+                created_at_millis: new Date().getTime(),
                 status: SUCCESS
             };
         case TYPE.REQUEST_AUTH_ERROR:

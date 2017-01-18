@@ -19,8 +19,7 @@ export default function auth(username, password) {
             .then((response) => {
                 switch (response.status) {
                     case  200:
-                        let created_at_millis = new Date().getTime();
-                        dispatch(authSuccess({...response.data, created_at_millis}));
+                        dispatch(authSuccess(response.data));
                         break;
                     default:
                         dispatch(authError(response.data))
