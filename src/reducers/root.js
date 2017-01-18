@@ -1,4 +1,9 @@
 import {combineReducers} from "redux";
+import auth from "./auth";
 
 
-export default combineReducers;
+let reducer = combineReducers({
+    auth: auth
+});
+
+export default reducer;
