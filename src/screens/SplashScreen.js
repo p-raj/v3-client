@@ -22,7 +22,7 @@ class SplashScreen extends React.Component {
         }
 
         // Check whether the token loaded from IDB is still valid
-        let validTillTimestamp = nextProps.auth.created_at_millis + (10 * 1000);
+        let validTillTimestamp = nextProps.auth.created_at_millis + (nextProps.auth.expires_in * 1000);
 
         // If the token is out of date, try to get a new token using the refresh token loaded from idb
         if (new Date() > new Date(validTillTimestamp)) {
