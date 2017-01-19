@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {TextInput, Button, View} from "react-native";
 import _ from "lodash";
 import auth from "../actions/auth";
+import loadPersistantData from "../actions/loadPersistantData";
 
 const styles = {
     container: {
@@ -44,6 +45,13 @@ class AuthScreen extends React.Component {
                         onPress={this.onLoginClicked}/>
             </View>
         )
+    }
+
+    componentDidMount() {
+        // Try loading data from idb
+        if (!this.props.idb) {
+            this.props.dispatch(loadPersistantData())
+        }
     }
 
     onUserNameChange(username) {
