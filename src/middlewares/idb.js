@@ -1,4 +1,5 @@
 import idb from "idb";
+import {Log} from "../logger/Logger";
 
 
 export const DB_NAME = 'veris_client';
@@ -12,9 +13,16 @@ const dbPromise = idb.open(DB_NAME, 1, upgradeDB => {
 const idbMiddleware = (store) => (next) => (action) => {
     dbPromise.then(db => {
         const tx = db.transaction(OBJ_STORE, 'readwrite');
-        tx.objectStore(OBJ_STORE).put({...store.getState()}, KEY);
+
+        // Start writing to IDB only if we have loaded existing data from it.
+        if (store.getState().idb === true) {
+            Log.i("IDB middle-ware wrote: ", store.getState());
+            tx.objectStore(OBJ_STORE).put({...store.getState()}, KEY);
+        }
+
         return tx.complete;
     });
+
     next(action);
 };
 
