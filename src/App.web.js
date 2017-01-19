@@ -3,9 +3,21 @@ import {Provider} from "react-redux";
 import {Router, Route, browserHistory} from "react-router";
 import store from "./store";
 import AuthScreen from "./screens/AuthScreen";
+import DashboardScreen from "./screens/DashboardScreen";
 import SplashScreen from "./screens/SplashScreen";
 import {syncHistoryWithStore} from "react-router-redux";
 
+
+const authenticate = (next, replace) => {
+    if (store.getState().idb) return;
+
+    replace({
+        pathname: '/',
+        state: {
+            next: next.location.pathname
+        }
+    })
+};
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
@@ -16,6 +28,8 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <Router history={history}>
+                    <Route path="/dashboard" component={DashboardScreen} onEnter={authenticate}/>
+                    <Route path="/auth" component={AuthScreen}/>
                     <Route path="/" component={SplashScreen}/>
                 </Router>
             </Provider>
