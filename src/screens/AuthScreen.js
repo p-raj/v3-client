@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {TextInput, Button, View} from "react-native";
 import _ from "lodash";
 import auth from "../actions/auth";
-import loadPersistantData from "../actions/loadPersistantData";
+import {SUCCESS} from "../common/constants";
 
 const styles = {
     container: {
@@ -30,6 +30,13 @@ class AuthScreen extends React.Component {
         this.onPasswordChange = this.onPasswordChange.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.auth.status === SUCCESS) {
+            // Move to splash screen which will redirect to proper screen
+            this.props.router.replace('/');
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -48,10 +55,10 @@ class AuthScreen extends React.Component {
     }
 
     componentDidMount() {
-        // Try loading data from idb
-        if (!this.props.idb) {
-            this.props.dispatch(loadPersistantData())
-        }
+        // Don't load data from idb
+        // Doing that will fire componentWillReceiveProps
+        // If we have status success stored in IDB for previous auth request
+        // then we will move to Splash Screen
     }
 
     onUserNameChange(username) {
