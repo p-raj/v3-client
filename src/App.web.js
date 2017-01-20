@@ -3,7 +3,7 @@ import {Provider} from "react-redux";
 import {Router, Route, browserHistory} from "react-router";
 import store from "./store";
 import AuthScreen from "./screens/AuthScreen";
-import DashboardScreen from "./screens/DashboardScreen";
+import MembershipsScreen from "./screens/MembershipsScreen";
 import SplashScreen from "./screens/SplashScreen";
 import {syncHistoryWithStore} from "react-router-redux";
 
@@ -28,7 +28,7 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <Router history={history}>
-                    <Route path="/dashboard" component={DashboardScreen} onEnter={authenticate}/>
+                    <Route path="/memberships" component={MembershipsScreen} onEnter={authenticate}/>
                     <Route path="/auth" component={AuthScreen}/>
                     <Route path="/" component={SplashScreen}/>
                 </Router>

@@ -5,7 +5,7 @@ import getMemberships from "../actions/getMemberships";
 import {FAILED, START} from "../common/constants";
 import _ from "lodash";
 
-class DashboardScreen extends React.Component {
+class MembershipsScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -47,13 +47,13 @@ class DashboardScreen extends React.Component {
 }
 
 // Redux wrapper
-DashboardScreen = connect((store) => {
+MembershipsScreen = connect((store) => {
     return {
         ...store
     }
-})(DashboardScreen);
+})(MembershipsScreen);
 
 // react-router wrapper
-DashboardScreen = withRouter(DashboardScreen);
+MembershipsScreen = withRouter(MembershipsScreen);
 
-export default DashboardScreen ;
+export default MembershipsScreen ;

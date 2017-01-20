@@ -35,7 +35,7 @@ class SplashScreen extends React.Component {
         // If the token is out of date, try to get a new token using the refresh token loaded from idb
         if (new Date() > new Date(validTillTimestamp)) {
             // Check if refresh token is also expired using status code of earlier requests
-            // If its FAILED then move to dashboard screen
+            // If its FAILED then move to auth screen
             if (this.props.refreshToken.status === FAILED) {
                 this.props.router.replace('/auth');
                 return;
@@ -54,7 +54,7 @@ class SplashScreen extends React.Component {
         }
 
         // TODO: Token is valid. Send to where we came from
-        this.props.router.replace('/dashboard');
+        this.props.router.replace('/memberships');
     }
 
     componentWillReceiveProps(nextProps) {
@@ -76,7 +76,7 @@ class SplashScreen extends React.Component {
         // If the token is out of date, try to get a new token using the refresh token loaded from idb
         if (new Date() > new Date(validTillTimestamp)) {
             // Check if refresh token is also expired using status code of earlier requests
-            // If its FAILED then move to dashboard screen
+            // If its FAILED then move to auth screen
             if (nextProps.refreshToken.status === FAILED) {
                 this.props.router.replace('/auth');
                 return;
@@ -95,7 +95,7 @@ class SplashScreen extends React.Component {
         }
 
         // TODO: Token is valid. Send to where we came from
-        this.props.router.replace('/dashboard');
+        this.props.router.replace('/memberships');
     }
 
     render() {
