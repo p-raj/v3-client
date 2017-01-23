@@ -4,6 +4,7 @@ import {routerReducer} from "react-router-redux";
 import {idbReducer} from "./idbReducer";
 import refreshTokenReducer from "./refreshTokenReducer";
 import membershipsReducer from "./membershipsReducer";
+import runtimesReducer from "./runtimesReducer";
 
 
 let reducer = combineReducers({
@@ -12,6 +13,7 @@ let reducer = combineReducers({
     auth: authReducer,
     refreshToken: refreshTokenReducer,
     memberships: membershipsReducer,
+    runtimes: runtimesReducer,
 });
 
 export default reducer;
